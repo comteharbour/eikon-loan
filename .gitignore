@@ -39,6 +39,7 @@ yarn-error.log*
 /translations
 /var
 /vendor
+/templates
 /composer.json
 /composer.lock
 /symphony.lock
