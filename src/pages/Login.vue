@@ -46,14 +46,18 @@ export default {
   name: 'PageLogin',
   data () {
     return {
-      email: ''
+      email: '2@2.com',
+      password: '222222'
     }
   },
   methods: {
     ...mapActions(['login']),
     handleLogin () {
       const vm = this
-      vm.login(vm.email)
+      vm.login({
+        email: vm.email,
+        password: vm.password
+      })
         .then(() => {
           vm.$router.push('/')
         })

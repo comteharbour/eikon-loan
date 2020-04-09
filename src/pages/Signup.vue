@@ -110,11 +110,11 @@ export default {
   name: 'PageSignup',
   data () {
     return {
-      firstName: '',
-      lastName: '',
-      email: '',
-      password: '',
-      confirmPassword: ''
+      firstName: '2',
+      lastName: '2',
+      email: '2@2.com',
+      password: '22222222',
+      confirmPassword: '22222222'
     }
   },
   methods: {

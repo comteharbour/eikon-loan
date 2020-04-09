@@ -1,5 +1,9 @@
 <template>
   <div>
+    <q-toggle
+      v-model="forceMaterial"
+      color="warning"
+      label="envoyer un identifiant de matériel prédéfini" />
     <qrcode-stream
       v-if="state==='WATCHING' || state==='INITIALIZING'"
       @decode="decode"
@@ -28,7 +32,8 @@ export default {
   data () {
     return {
       state: 'INITIALIZING',
-      error: null
+      error: null,
+      forceMaterial: false
     }
   },
   computed: {
@@ -45,17 +50,21 @@ export default {
       verifyMaterial: 'verifyMaterial'
     }),
     decode (materialUuid) {
-      this.state = 'VERIFY_MATERIAL'
-      // this.verifyMaterial(materialUuid)
-      this.verifyMaterial({ materialUuid: 'c364587d-725b-4603-95d0-fee32f0323ff' })
+      const vm = this
+      vm.state = 'VERIFY_MATERIAL'
+      const verify = () => {
+        if (vm.forceMaterial) return vm.verifyMaterial({ materialUuid: 'c364587d-725b-4603-95d0-fee32f0323ff' })
+        else return vm.verifyMaterial(materialUuid)
+      }
+      verify()
         .then(response => {
-          this.$emit('materialVerified', response.material)
+          vm.$emit('materialVerified', response.material)
         })
         .catch(error => {
-          this.state = 'ERROR'
+          vm.state = 'ERROR'
           switch (error) {
-            case 'materialDoesNotExist': this.error = 'Erreur: le QR-Code saisi ne figure pas dans la base de données.'; break
-            default: this.error = `Erreur inconnue: ${error}`
+            case 'materialDoesNotExist': vm.error = 'Erreur: le QR-Code saisi ne figure pas dans la base de données.'; break
+            default: vm.error = `Erreur inconnue: ${error}`
           }
         })
     },

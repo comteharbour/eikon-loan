@@ -15,6 +15,11 @@
         <q-toolbar-title>
           Je m'appelle RETOUR !
         </q-toolbar-title>
+        <q-toggle
+          :value="$store.getters.isConnected"
+          @input="$store.commit('toggleConnect')" color="warning"
+          label="forcer la connection"
+          left-label />
       </q-toolbar>
     </q-header>
 
