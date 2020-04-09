@@ -4,16 +4,12 @@ export function signup ({ commit }, { firstName, lastName, email, password }) {
   return axios.signup({ firstName, lastName, email, password })
 }
 
-// export function login ({ commit }, { email, password }) {
-//   return new Promise((resolve, reject) => {
-//     axios.login({ email, password })
-//       .then(response => {
-//         // handle
-//         resolve(response)
-//       })
-//       .catch(error => reject(error))
-//   })
-// }
+export function login ({ commit }, { email, password }) {
+  return new Promise((resolve, reject) => {
+    commit('login', email)
+    resolve()
+  })
+}
 
 // export function logout ({ commit }) {
 //   return new Promise((resolve, reject) => {

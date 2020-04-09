@@ -3,7 +3,6 @@ export default function () {
     email: null,
     firstName: null,
     lastName: null,
-    isConnected: false,
-    loans: []
+    isConnected: false
   }
 }
